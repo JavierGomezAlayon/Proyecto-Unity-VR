@@ -11,6 +11,9 @@ public class Disparo : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform spawnPoint;
     public float bulletSpeed = 20f;
+    
+
+    public GameObject collisionParticleEffect;
 
     private void OnEnable()
     {

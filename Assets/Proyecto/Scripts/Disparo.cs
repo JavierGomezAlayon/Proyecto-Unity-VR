@@ -1,27 +1,36 @@
 using UnityEngine;
+using UnityEngine.InputSystem; // Importante para el nuevo Input System
 
 public class Disparo : MonoBehaviour
 {
-    public GameObject balaPrefab;
-    public Transform puntoDisparo;
-    public float velocidadBala = 20f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Input")]
+    // Esto nos permitirá seleccionar el gatillo desde el Inspector
+    public InputActionProperty shootAction;
+
+    [Header("Bala")]
+    public GameObject bulletPrefab;
+    public Transform spawnPoint;
+    public float bulletSpeed = 20f;
+
+    private void OnEnable()
     {
-        
+        // Nos suscribimos al evento de "presionado"
+        shootAction.action.performed += OnShoot;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        // Desuscribirse para evitar errores de memoria
+        shootAction.action.performed -= OnShoot;
     }
 
-    public void Disparar()
+    private void OnShoot(InputAction.CallbackContext context)
     {
-        GameObject bala = Instantiate(balaPrefab, puntoDisparo.position, puntoDisparo.rotation);
-        Rigidbody rb = bala.GetComponent<Rigidbody>();
-        rb.linearVelocity = puntoDisparo.forward * velocidadBala;
-        Destroy(bala, 5f); // Destruye la bala después de 5 segundos para evitar acumulación
+        GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+        if (bullet.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        {
+            rb.linearVelocity = spawnPoint.forward * bulletSpeed;
+        }
+        Destroy(bullet, 10f);
     }
 }

@@ -4,8 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - balaPrefab: {fileID: 5931067337988209120, guid: ba7bd879d573dd948a3495dc71af5b50, type: 3}
-  - puntoDisparo: {instanceID: 0}
+  - bulletPrefab: {fileID: 5931067337988209120, guid: ba7bd879d573dd948a3495dc71af5b50, type: 3}
+  - spawnPoint: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

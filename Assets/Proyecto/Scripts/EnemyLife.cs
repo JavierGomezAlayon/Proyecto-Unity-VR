@@ -36,6 +36,14 @@ public class EnemyLife : MonoBehaviour
 
     void Die()
     {
+        if (scriptEnemyCounter == null)
+        {
+            scriptEnemyCounter = enemyManager.GetComponent<RestEnemyManager>();
+            if (scriptEnemyCounter == null)
+            {
+                Debug.LogWarning("EnemyLife: No se encontró RestEnemyManager en el objeto asignado.");
+            }
+        } 
         if (scriptEnemyCounter != null)
         {
             scriptEnemyCounter.EnemyDefeated();

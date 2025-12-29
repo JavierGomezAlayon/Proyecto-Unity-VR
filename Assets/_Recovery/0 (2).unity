@@ -419,7 +419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7838672616030844005, guid: 96a128afd6bd9dd4a97e49d873254d03, type: 3}
       propertyPath: m_Name
-      value: Zona2
+      value: Zona1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

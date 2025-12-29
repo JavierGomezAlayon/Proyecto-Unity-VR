@@ -14,14 +14,23 @@ public class Balabehaviour : MonoBehaviour
         {
             enemy.TakeDamage(damage);
             Debug.Log("Impacto físico detectado en enemigo");
+            ParticulasImpacto();
+            Destroy(gameObject);
+        } else if (collision.gameObject.CompareTag("Entorno"))
+        {
+            ParticulasImpacto();
+            Destroy(gameObject);
         }
 
         // Destruimos la bala al impactar contra cualquier cosa y opcionalmente instanciamos un efecto de partículas
+        
+    }
+
+    private void ParticulasImpacto()
+    {
         if (collisionParticleEffect != null)
         {
             Instantiate(collisionParticleEffect, transform.position, Quaternion.identity);
         }
-        Destroy(gameObject);
     }
-     
 }

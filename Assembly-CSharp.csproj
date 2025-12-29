@@ -52,6 +52,7 @@
     <Compile Include="Assets\Proyecto\Scripts\Disparo.cs" />
     <Compile Include="Assets\Proyecto\Scripts\TriggerZone.cs" />
     <Compile Include="Assets\Proyecto\Scripts\SpawnerEnemy.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\RestEnemyManager.cs" />
     <Compile Include="Assets\Proyecto\Scripts\EnemyLife.cs" />
     <Compile Include="Assets\Proyecto\Scripts\Movimiento personaje.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />

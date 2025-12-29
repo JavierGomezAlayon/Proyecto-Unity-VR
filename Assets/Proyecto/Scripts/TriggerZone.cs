@@ -10,9 +10,9 @@ public class TriggerZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"{gameObject.name}: Jugador ha entrado en el trigger.");
         if (other.CompareTag(playerTag))
         {
+            Debug.Log($"{gameObject.name}: Jugador ha entrado en el trigger.");
             onPlayerEnter?.Invoke();
 
             if (destroyAfterActivation)

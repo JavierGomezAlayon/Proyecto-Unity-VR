@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Entorno
+  - ManageEnemyCount
+  - Enemy
+  - "AlDa\xF1arEnviarA"
   layers:
   - Default
   - TransparentFX

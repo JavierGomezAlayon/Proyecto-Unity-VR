@@ -21,6 +21,19 @@ public class Balabehaviour : MonoBehaviour
             ParticulasImpacto();
             Destroy(gameObject);
         }
+        else if (collision.gameObject.CompareTag("AlDañarEnviarA"))
+        {
+            AlDañarEnviarA damageTrigger = collision.gameObject.GetComponent<AlDañarEnviarA>();
+            if (damageTrigger != null)
+            {
+                damageTrigger.TakeDamage(damage);
+                Debug.Log("Impacto físico detectado en trigger de daño");
+                ParticulasImpacto();
+                Destroy(gameObject);
+            } else {
+                Debug.LogWarning("El objeto con tag 'AlDañarEnviarA' no tiene el componente AlDañarEnviarA.");
+            }
+        }
 
         // Destruimos la bala al impactar contra cualquier cosa y opcionalmente instanciamos un efecto de partículas
         

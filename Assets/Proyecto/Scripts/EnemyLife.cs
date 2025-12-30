@@ -5,12 +5,29 @@ public class EnemyLife : MonoBehaviour
     [Header("Ajustes de Salud")]
     public float health = 20f;
     public bool destroyOnDeath = true;
-    [Header("Trigger de final de zona")]
-    public GameObject enemyManager; // Referencia al gestor de enemigos
 
     [Header("Efectos (Opcional)")]
     public GameObject deathEffectPrefab; // Prefab de explosión de partículas
+
+    private GameObject enemyManager;
     private RestEnemyManager scriptEnemyCounter;
+
+    // Para efecto de daño
+
+
+    private void Start()
+    {
+        // Busco el objeto que maneja el conteo de enemigos en la escena
+        enemyManager = GameObject.FindGameObjectWithTag("ManageEnemyCount");
+        if (enemyManager == null)
+        {
+            Debug.LogWarning("EnemyLife: No se encontró ningún objeto con el tag 'ManageEnemyCount' en la escena.");
+        }
+        añadirEnemigo();
+
+        // Obtengo el material del objeto para ponerlo en rojo al recibir daño
+
+    }
     public void añadirEnemigo()
     {
         scriptEnemyCounter = enemyManager.GetComponent<RestEnemyManager>();
@@ -34,7 +51,7 @@ public class EnemyLife : MonoBehaviour
         }
     }
 
-    void Die()
+    private void Die()
     {
         if (scriptEnemyCounter == null)
         {

@@ -6,12 +6,12 @@ public class Movimientopersonaje : MonoBehaviour
     public float moveSpeed = 3.0f; // Velocidad constante (ajusta a tu gusto)
     public bool isMoving = true;
 
-    void Update()
+    void FixedUpdate()
     {
         if (isMoving)
         {
             // Movimiento hacia adelante en su eje local Z
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * moveSpeed * Time.fixedDeltaTime);
         }
     }
     

@@ -17,7 +17,8 @@ public class LookAtPlayer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Transform ptransform = player.GetComponent<Transform>();
         // Hacer que el objeto mire hacia el jugador
-        transform.LookAt(player.transform);
+        transform.LookAt(ptransform);
     }
 }

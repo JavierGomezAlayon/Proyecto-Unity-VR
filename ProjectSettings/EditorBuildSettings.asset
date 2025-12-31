@@ -12,11 +12,17 @@ EditorBuildSettings:
     path: Assets/Proyecto/Scenes/MenuInicial.unity
     guid: 63dc8761b91a5a84fb0a9826b334dfb2
   - enabled: 1
-    path: Assets/Proyecto/Scenes/Escena de prueba.unity
+    path: Assets/Proyecto/Scenes/LVL1.unity
     guid: d5bf4a99f7f82b94ba5cba6ad4536ed5
   - enabled: 1
     path: Assets/Proyecto/Scenes/GameOver.unity
     guid: c894489372868124cb29b3dd58d4d1af
+  - enabled: 1
+    path: Assets/Proyecto/Scenes/FinalScene.unity
+    guid: 010e307bda446294b941be3f9dd30e49
+  - enabled: 1
+    path: Assets/Proyecto/Scenes/LVL2.unity
+    guid: b739ba86daa590d4c8593ba6558d8d7b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: fb4d0b111645ab34ca57219f9aa14a76, type: 2}

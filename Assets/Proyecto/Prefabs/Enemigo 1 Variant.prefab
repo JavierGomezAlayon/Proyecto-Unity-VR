@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9177497d1c19a8b4d8e465fb1173c3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyLife
-  health: 20
+  health: 10
   destroyOnDeath: 1
   deathEffectPrefab: {fileID: 0}
 --- !u!136 &5652974264814903096

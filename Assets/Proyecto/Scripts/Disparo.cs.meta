@@ -4,8 +4,12 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - bulletPrefab: {fileID: 5931067337988209120, guid: ba7bd879d573dd948a3495dc71af5b50, type: 3}
+  - bulletPrefab: {fileID: 6152012165266093810, guid: f9dddfb7d33b5f34da099be5bed8d06f, type: 3}
   - spawnPoint: {instanceID: 0}
+  - shootSound: {instanceID: 0}
+  - emptySound: {instanceID: 0}
+  - reloadSound: {instanceID: 0}
+  - collisionParticleEffect: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -11,9 +11,22 @@ public class Disparo : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform spawnPoint;
     public float bulletSpeed = 20f;
-    
+    private int currentBullets;
+    private int maxBullets = 10;
+    private AudioSource audioSource;
+
+    [Header("Audio")]
+    public AudioClip shootSound;
+    public AudioClip emptySound;
+    public AudioClip reloadSound;
 
     public GameObject collisionParticleEffect;
+
+    void Start()
+    {
+        currentBullets = maxBullets;
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnEnable()
     {
@@ -28,12 +41,44 @@ public class Disparo : MonoBehaviour
     }
 
     private void OnShoot(InputAction.CallbackContext context)
-    {
-        GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
-        if (bullet.TryGetComponent<Rigidbody>(out Rigidbody rb))
+    {   
+        if ( currentBullets > 0)
         {
-            rb.linearVelocity = spawnPoint.forward * bulletSpeed;
+            ShootBullet();
         }
-        Destroy(bullet, 10f);
+        else
+        {
+            // PlaySound(emptySound);
+        }
+        
+    }
+
+    private void ShootBullet()
+    {
+            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+            if (bullet.TryGetComponent<Rigidbody>(out Rigidbody rb))
+            {
+                rb.linearVelocity = spawnPoint.forward * bulletSpeed;
+            }
+            Destroy(bullet, 10f);
+            currentBullets--;
+            // PlaySound(shootSound);
+    }
+
+    public void Reload()
+    {
+        if (currentBullets < maxBullets)
+        {
+            currentBullets = maxBullets;
+            // PlaySound(reloadSound);
+        }
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 }

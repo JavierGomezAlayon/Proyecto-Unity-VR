@@ -7,8 +7,8 @@ MonoImporter:
   - bulletPrefab: {fileID: 6152012165266093810, guid: f9dddfb7d33b5f34da099be5bed8d06f, type: 3}
   - spawnPoint: {instanceID: 0}
   - shootSound: {instanceID: 0}
-  - emptySound: {instanceID: 0}
-  - reloadSound: {instanceID: 0}
+  - emptySound: {fileID: 8300000, guid: 444512db074d0e84b9154277cd8da3b5, type: 3}
+  - reloadSound: {fileID: 8300000, guid: 2ac08d21e9a61d943b0b7b59ae97d584, type: 3}
   - collisionParticleEffect: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}

@@ -10,7 +10,7 @@ public class Disparo : MonoBehaviour
     [Header("Bala")]
     public GameObject bulletPrefab;
     public Transform spawnPoint;
-    public float bulletSpeed = 20f;
+    public float bulletSpeed = 50f;
     private int currentBullets;
     private int maxBullets = 10;
     private AudioSource audioSource;
@@ -48,7 +48,7 @@ public class Disparo : MonoBehaviour
         }
         else
         {
-            // PlaySound(emptySound);
+            PlaySound(emptySound);
         }
         
     }
@@ -62,7 +62,7 @@ public class Disparo : MonoBehaviour
             }
             Destroy(bullet, 10f);
             currentBullets--;
-            // PlaySound(shootSound);
+            PlaySound(shootSound);
     }
 
     public void Reload()
@@ -70,7 +70,7 @@ public class Disparo : MonoBehaviour
         if (currentBullets < maxBullets)
         {
             currentBullets = maxBullets;
-            // PlaySound(reloadSound);
+            PlaySound(reloadSound);
         }
     }
 

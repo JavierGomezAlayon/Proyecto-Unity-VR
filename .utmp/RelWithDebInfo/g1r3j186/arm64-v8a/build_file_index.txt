@@ -1,0 +1,2 @@
+C:\Users\frann\Documents\Unity\Proyecto final 4 - copia tar\Proyecto final 4 - copia\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\frann\Documents\Unity\Proyecto final 4 - copia tar\Proyecto final 4 - copia\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

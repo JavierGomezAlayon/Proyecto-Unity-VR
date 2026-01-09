@@ -3,7 +3,7 @@ using UnityEngine;
 public class Movimientopersonaje : MonoBehaviour
 {
     [Header("Configuración de Velocidad")]
-    public float moveSpeed = 3.0f; // Velocidad constante (ajusta a tu gusto)
+    public float moveSpeed = 3.0f;
     public bool isMoving = true;
 
     void FixedUpdate()

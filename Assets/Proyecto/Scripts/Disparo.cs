@@ -1,11 +1,14 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // Importante para el nuevo Input System
+using UnityEngine.InputSystem;
 
 public class Disparo : MonoBehaviour
 {
     [Header("Input")]
-    // Esto nos permitirá seleccionar el gatillo desde el Inspector
     public InputActionProperty shootAction;
+
+    [Header("Referencias Externas")]
+    public RelojInteligente relojRef;
+    public Movimientopersonaje movimientoJugador;
 
     [Header("Bala")]
     public GameObject bulletPrefab;
@@ -22,23 +25,22 @@ public class Disparo : MonoBehaviour
 
     public GameObject collisionParticleEffect;
 
-    public RelojInteligente relojRef;
-
     void Start()
     {
         currentBullets = maxBullets;
         audioSource = GetComponent<AudioSource>();
+        
+        if (movimientoJugador == null) 
+            movimientoJugador = FindFirstObjectByType<Movimientopersonaje>();
     }
 
     private void OnEnable()
     {
-        // Nos suscribimos al evento de "presionado"
         shootAction.action.performed += OnShoot;
     }
 
     private void OnDisable()
     {
-        // Desuscribirse para evitar errores de memoria
         shootAction.action.performed -= OnShoot;
     }
 
@@ -52,22 +54,28 @@ public class Disparo : MonoBehaviour
         {
             PlaySound(emptySound);
         }
-        
     }
 
     private void ShootBullet()
     {
-            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
-            if (bullet.TryGetComponent<Rigidbody>(out Rigidbody rb))
-            {
-                rb.linearVelocity = spawnPoint.forward * bulletSpeed;
-            }
-            Destroy(bullet, 10f);
-            currentBullets--;
-            if(relojRef) relojRef.ActualizarBalas(currentBullets, maxBullets);
-            PlaySound(shootSound);
-    }
+        GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+        if (bullet.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        {
+            float velocidadFinal = bulletSpeed;
 
+            if (movimientoJugador != null && movimientoJugador.isMoving)
+            {
+                velocidadFinal += movimientoJugador.moveSpeed;
+            }
+
+            rb.linearVelocity = spawnPoint.forward * velocidadFinal; 
+        }
+        Destroy(bullet, 10f);
+        currentBullets--;
+        if(relojRef) relojRef.ActualizarBalas(currentBullets, maxBullets);
+        PlaySound(shootSound);
+    }
+    
     public void Reload()
     {
         if (currentBullets < maxBullets)

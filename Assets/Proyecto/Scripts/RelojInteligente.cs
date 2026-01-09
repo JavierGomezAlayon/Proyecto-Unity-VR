@@ -1,25 +1,37 @@
 using UnityEngine;
-using TMPro; // Necesario para el texto
+using TMPro; 
+using UnityEngine.UI; 
+using UnityEngine.SceneManagement;
 
 public class RelojInteligente : MonoBehaviour
 {
-    [Header("Configuración UI")]
-    public GameObject pantallaCanvas; // Arrastra aquí el 'CanvasPantalla'
+    [Header("Configuración UI Texto")]
+    public GameObject pantallaCanvas; 
     public TextMeshProUGUI textoBalas;
     public TextMeshProUGUI textoVida;
 
+    [Header("Configuración Barra de Vida")]
+    public Image barraVidaImagen; 
+    
+    // Colores configurables
+    public Color colorSaludAlta = new Color(1f, 0.0f, 0.8f); // Rosa
+    public Color colorSaludMedia = new Color(1f, 0.5f, 0f); // Naranja
+    public Color colorSaludBaja = Color.red;              // Rojo
+
+    [Header("Configuración Game Over")]
+    [Tooltip("Escribe aquí el nombre EXACTO de tu escena de Game Over")]
+    public string nombreEscenaGameOver = "gameoverSceneName";
+
     [Header("Configuración Gesto")]
-    public Transform cabezaJugador; // Arrastra la Main Camera aquí
-    [Tooltip("Que tan preciso debe ser el giro de muñeca (1 = perfecto, 0.5 = 45 grados)")]
+    public Transform cabezaJugador; 
     public float umbralMirada = 0.7f; 
 
     private void Start()
     {
-        // Al principio apagamos la pantalla para ahorrar batería virtual ;)
         if(pantallaCanvas) pantallaCanvas.SetActive(false);
-        
-        // Si no asignaste la cámara manual, la busca sola
         if (cabezaJugador == null) cabezaJugador = Camera.main.transform;
+        
+        ActualizarVida(100);
     }
 
     private void Update()
@@ -30,18 +42,9 @@ public class RelojInteligente : MonoBehaviour
     void DetectarGestoMirarReloj()
     {
         if (!pantallaCanvas) return;
-
-        // 1. Calculamos la dirección desde el reloj hacia la cabeza
         Vector3 direccionHaciaCabeza = (cabezaJugador.position - transform.position).normalized;
-
-        // 2. Calculamos hacia dónde mira la "cara" del reloj
         Vector3 direccionPantalla = transform.forward; 
-
-        // 3. Producto Punto: Compara que tan paralelos son dos vectores.
-        // 1.0 significa que la pantalla te mira directo a los ojos.
         float angulo = Vector3.Dot(direccionPantalla, direccionHaciaCabeza);
-
-        // Si el ángulo supera el umbral, encendemos la pantalla
         bool estaMirando = angulo > umbralMirada;
 
         if (estaMirando != pantallaCanvas.activeSelf)
@@ -50,14 +53,29 @@ public class RelojInteligente : MonoBehaviour
         }
     }
 
-    // Métodos públicos para que el arma los llame
     public void ActualizarBalas(int actuales, int maximas)
     {
         if(textoBalas) textoBalas.text = $"{actuales}/{maximas}";
     }
 
-    public void ActualizarVida(int vida)
+    public void ActualizarVida(int vidaActual)
     {
-        if(textoVida) textoVida.text = $"HP: {vida}";
+        if(textoVida) textoVida.text = vidaActual.ToString();
+
+        if (barraVidaImagen)
+        {
+            float porcentaje = (float)vidaActual / 100f;
+            barraVidaImagen.fillAmount = porcentaje;
+
+            if (vidaActual > 50) barraVidaImagen.color = colorSaludAlta;
+            else if (vidaActual > 25) barraVidaImagen.color = colorSaludMedia;
+            else barraVidaImagen.color = colorSaludBaja;
+        }
+
+        // Si la vida llega a 0, cambiamos de escena
+        if (vidaActual <= 0)
+        {
+            SceneManager.LoadScene(nombreEscenaGameOver);
+        }
     }
 }

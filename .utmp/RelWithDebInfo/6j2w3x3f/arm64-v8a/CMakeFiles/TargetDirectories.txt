@@ -1,0 +1,5 @@
+C:/Users/Paula/Desktop/Proyecto-Unity-VR/.utmp/RelWithDebInfo/6j2w3x3f/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Paula/Desktop/Proyecto-Unity-VR/.utmp/RelWithDebInfo/6j2w3x3f/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/Paula/Desktop/Proyecto-Unity-VR/.utmp/RelWithDebInfo/6j2w3x3f/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/Paula/Desktop/Proyecto-Unity-VR/.utmp/RelWithDebInfo/6j2w3x3f/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/Paula/Desktop/Proyecto-Unity-VR/.utmp/RelWithDebInfo/6j2w3x3f/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir

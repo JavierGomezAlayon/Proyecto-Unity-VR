@@ -22,6 +22,8 @@ public class Disparo : MonoBehaviour
 
     public GameObject collisionParticleEffect;
 
+    public RelojInteligente relojRef;
+
     void Start()
     {
         currentBullets = maxBullets;
@@ -62,6 +64,7 @@ public class Disparo : MonoBehaviour
             }
             Destroy(bullet, 10f);
             currentBullets--;
+            if(relojRef) relojRef.ActualizarBalas(currentBullets, maxBullets);
             PlaySound(shootSound);
     }
 

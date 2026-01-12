@@ -2949,6 +2949,8 @@ GameObject:
   - component: {fileID: 3776581712583932334}
   - component: {fileID: 4203609252027451895}
   - component: {fileID: 1575514457572853603}
+  - component: {fileID: 4965030090940717151}
+  - component: {fileID: 1833203342217012409}
   m_Layer: 2
   m_Name: Jugador
   m_TagString: Player
@@ -3149,6 +3151,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4965030090940717151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731953054823929011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b6bef2a146663b49a693d2a1f7aef3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaludJugador
+  vidaMaxima: 100
+  vidaActual: 100
+  relojRef: {fileID: 292122173701428826}
+  efectoEscudo: {fileID: 0}
+--- !u!114 &1833203342217012409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731953054823929011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5486babe231fc418b3d981d456565d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SolicitarPermisos
 --- !u!1 &1885157127835099380
 GameObject:
   m_ObjectHideFlags: 0
@@ -5506,6 +5536,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4437659515884263963}
   - component: {fileID: 292122173701428826}
+  - component: {fileID: 2145221890490088054}
+  - component: {fileID: 5429158683161160452}
+  - component: {fileID: 686202953751040396}
   m_Layer: 0
   m_Name: Reloj
   m_TagString: Untagged
@@ -5559,6 +5592,81 @@ MonoBehaviour:
   nombreEscenaGameOver: gameoverSceneName
   cabezaJugador: {fileID: 0}
   umbralMirada: 0.7
+--- !u!114 &2145221890490088054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3953715711735070881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9370225a2ca94276b870d5f87b0db55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: com.whisper.unity::Whisper.WhisperManager
+  logLevel: 1
+  modelPath: Whisper/ggml-tiny.bin
+  isModelPathInStreamingAssets: 1
+  initOnAwake: 1
+  useGpu: 0
+  flashAttention: 0
+  language: es
+  translateToEnglish: 0
+  strategy: 0
+  noContext: 1
+  singleSegment: 0
+  enableTokens: 0
+  initialPrompt: 
+  stepSec: 3
+  keepSec: 0.2
+  lengthSec: 10
+  updatePrompt: 1
+  dropOldBuffer: 0
+  useVad: 1
+  tokensTimestamps: 0
+  audioCtx: 0
+--- !u!114 &5429158683161160452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3953715711735070881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc03a4c19604ea394e364f8fc632928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: com.whisper.unity::Whisper.Utils.MicrophoneRecord
+  maxLengthSec: 60
+  loop: 0
+  frequency: 16000
+  chunksLengthSec: 0.5
+  echo: 1
+  useVad: 1
+  vadUpdateRateSec: 0.1
+  vadContextSec: 30
+  vadLastSec: 1.25
+  vadThd: 1
+  vadFreqThd: 100
+  vadIndicatorImage: {fileID: 0}
+  vadStop: 0
+  dropVadPart: 1
+  vadStopTime: 3
+  microphoneDropdown: {fileID: 0}
+  microphoneDefaultLabel: Default microphone
+--- !u!114 &686202953751040396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3953715711735070881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45099f9acc31cc84db5127a294db2b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlVozVR
+  saludJugador: {fileID: 4965030090940717151}
 --- !u!1 &3965067978652717935
 GameObject:
   m_ObjectHideFlags: 0

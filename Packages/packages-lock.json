@@ -355,6 +355,12 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.whisper.unity": {
+      "version": "file:C:/Users/Paula/Downloads/whisper.unity-1.4.0/Packages/com.whisper.unity",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,

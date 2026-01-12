@@ -1202,12 +1202,12 @@
       <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.UserInterface.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Meta.Wit.Composer.Editor">
-      <HintPath>Library\ScriptAssemblies\Meta.Wit.Composer.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>Library\ScriptAssemblies\UnityEngine.SpatialTracking.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.Wit.Composer.Editor">
+      <HintPath>Library\ScriptAssemblies\Meta.Wit.Composer.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Rendering.LightTransport.Editor">
@@ -1814,7 +1814,9 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.csproj" />
+    <ProjectReference Include="com.whisper.unity.editor.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj" />
+    <ProjectReference Include="com.whisper.unity.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

@@ -13,23 +13,26 @@ public class RelojInteligente : MonoBehaviour
     [Header("Configuración Barra de Vida")]
     public Image barraVidaImagen; 
     
-    // Colores configurables
-    public Color colorSaludAlta = new Color(1f, 0.0f, 0.8f); // Rosa
-    public Color colorSaludMedia = new Color(1f, 0.5f, 0f); // Naranja
-    public Color colorSaludBaja = Color.red;              // Rojo
+    public Color colorSaludAlta = new Color(1f, 0.0f, 0.8f);
+    public Color colorSaludMedia = new Color(1f, 0.5f, 0f);
+    public Color colorSaludBaja = Color.red;
 
     [Header("Configuración Game Over")]
-    [Tooltip("Escribe aquí el nombre EXACTO de tu escena de Game Over")]
-    public string nombreEscenaGameOver = "gameoverSceneName";
+    public string nombreEscenaGameOver = "GameOver"; // Asegúrate del nombre exacto
 
     [Header("Configuración Gesto")]
     public Transform cabezaJugador; 
     public float umbralMirada = 0.7f; 
 
+    // --- ESTA ES LA VARIABLE QUE NECESITA EL OTRO SCRIPT ---
+    public bool elJugadorMeMira { get; private set; } 
+    // -------------------------------------------------------
+
     private void Start()
     {
         if(pantallaCanvas) pantallaCanvas.SetActive(false);
-        if (cabezaJugador == null) cabezaJugador = Camera.main.transform;
+        if (cabezaJugador == null && Camera.main != null) 
+            cabezaJugador = Camera.main.transform;
         
         ActualizarVida(100);
     }
@@ -42,14 +45,19 @@ public class RelojInteligente : MonoBehaviour
     void DetectarGestoMirarReloj()
     {
         if (!pantallaCanvas) return;
+        
+        // Calculamos si miras
         Vector3 direccionHaciaCabeza = (cabezaJugador.position - transform.position).normalized;
         Vector3 direccionPantalla = transform.forward; 
         float angulo = Vector3.Dot(direccionPantalla, direccionHaciaCabeza);
-        bool estaMirando = angulo > umbralMirada;
+        
+        // Guardamos el dato en la variable pública
+        elJugadorMeMira = angulo > umbralMirada;
 
-        if (estaMirando != pantallaCanvas.activeSelf)
+        // Encendemos/Apagamos pantalla
+        if (elJugadorMeMira != pantallaCanvas.activeSelf)
         {
-            pantallaCanvas.SetActive(estaMirando);
+            pantallaCanvas.SetActive(elJugadorMeMira);
         }
     }
 
@@ -72,7 +80,6 @@ public class RelojInteligente : MonoBehaviour
             else barraVidaImagen.color = colorSaludBaja;
         }
 
-        // Si la vida llega a 0, cambiamos de escena
         if (vidaActual <= 0)
         {
             SceneManager.LoadScene(nombreEscenaGameOver);

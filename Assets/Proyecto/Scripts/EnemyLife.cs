@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyLife : MonoBehaviour
 {
@@ -7,43 +8,38 @@ public class EnemyLife : MonoBehaviour
     public bool destroyOnDeath = true;
 
     [Header("Efectos (Opcional)")]
-    public GameObject deathEffectPrefab; // Prefab de explosión de partículas
+    public GameObject deathEffectPrefab;
 
+    private Animator animator;
     private GameObject enemyManager;
     private RestEnemyManager scriptEnemyCounter;
-
-    // Para efecto de daño
-
+    private bool isDead = false;
 
     private void Start()
     {
-        // Busco el objeto que maneja el conteo de enemigos en la escena
+        animator = GetComponent<Animator>();
+        
         enemyManager = GameObject.FindGameObjectWithTag("ManageEnemyCount");
-        if (enemyManager == null)
+        if (enemyManager != null)
         {
-            Debug.LogWarning("EnemyLife: No se encontró ningún objeto con el tag 'ManageEnemyCount' en la escena.");
+            añadirEnemigo();
         }
-        añadirEnemigo();
-
-        // Obtengo el material del objeto para ponerlo en rojo al recibir daño
-
     }
+
     public void añadirEnemigo()
     {
         scriptEnemyCounter = enemyManager.GetComponent<RestEnemyManager>();
-        if (scriptEnemyCounter == null)
-        {
-            Debug.LogWarning("EnemyLife: No se encontró RestEnemyManager en el objeto asignado.");
-        } else
+        if (scriptEnemyCounter != null)
         {
             scriptEnemyCounter.AddEnemy();
         }
     }
-    // Esta función será llamada por la bala al impactar
+
     public void TakeDamage(float amount)
     {
+        if (isDead) return; // Si ya está muerto, ignoramos daño extra
+
         health -= amount;
-        // Debug.Log($"{gameObject.name} recibió {amount} de daño. Vida restante: {health}");
 
         if (health <= 0f)
         {
@@ -53,28 +49,38 @@ public class EnemyLife : MonoBehaviour
 
     private void Die()
     {
-        if (scriptEnemyCounter == null)
+        isDead = true;
+
+        // 1. Notificar al manager
+        if (scriptEnemyCounter == null && enemyManager != null)
         {
             scriptEnemyCounter = enemyManager.GetComponent<RestEnemyManager>();
-            if (scriptEnemyCounter == null)
-            {
-                Debug.LogWarning("EnemyLife: No se encontró RestEnemyManager en el objeto asignado.");
-            }
         } 
         if (scriptEnemyCounter != null)
         {
             scriptEnemyCounter.EnemyDefeated();
         }
+
+        // 2. Efectos visuales (Partículas)
         if (deathEffectPrefab != null)
         {
             Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
         }
 
+        // 3. ANIMACIÓN DE MUERTE
+        if (animator != null)
+        {
+            animator.SetTrigger("Morir");
+        }
+
+        // 4. Desactivar colisiones para que no bloquee balas ni al jugador mientras cae
+        Collider col = GetComponent<Collider>();
+        if (col != null) col.enabled = false;
+
+        // 5. Destruir el objeto con retraso (para que se vea la animación)
         if (destroyOnDeath)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, 5f); 
         }
-        
-        // Debug.Log("Enemigo eliminado");
     }
 }

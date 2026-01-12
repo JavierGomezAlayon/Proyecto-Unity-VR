@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5488348360316900791}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.293, z: 0}
+  m_LocalPosition: {x: 0, y: 0.222, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerEnemy
   triggerTargetStart: {fileID: 0}
-  enemyPrefab: {fileID: 3747487064728956406, guid: 99e0ece579ffa2646963260cd8a43e1d, type: 3}
+  enemyPrefab: {fileID: 4555701838393302646, guid: b5999a0028cd5844fad4365420a80920, type: 3}
 --- !u!1 &7643218044429342256
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 7227605655841013699}
   - component: {fileID: 1637630868821196008}
   m_Layer: 0
-  m_Name: Plataforma 1
+  m_Name: PlataformaRobotBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -25,6 +25,19 @@ public class Disparo : MonoBehaviour
 
     public GameObject collisionParticleEffect;
 
+    [Header("--- SISTEMA DE ATASCO ---")]
+    public float calorPorDisparo = 20f;      
+    public float velocidadEnfriamiento = 5f; 
+    public float umbralSoplido = 0.2f;       
+    public float enfriamientoAlSoplar = 80f; 
+
+    [Header("Visuales Atasco (Solo Humo)")]
+    public ParticleSystem humoParticulas; // Solo humo, nada de colores
+    
+    // Variables internas
+    private float calorActual = 0f;
+    private bool estaAtascada = false;
+
     void Start()
     {
         currentBullets = maxBullets;
@@ -32,6 +45,8 @@ public class Disparo : MonoBehaviour
         
         if (movimientoJugador == null) 
             movimientoJugador = FindFirstObjectByType<Movimientopersonaje>();
+
+        if (humoParticulas != null) humoParticulas.Stop();
     }
 
     private void OnEnable()
@@ -44,9 +59,57 @@ public class Disparo : MonoBehaviour
         shootAction.action.performed -= OnShoot;
     }
 
+    private void Update()
+    {
+        GestionarTemperatura();
+        ActualizarHumo();
+    }
+
+    private void GestionarTemperatura()
+    {
+        // 1. DETECTAR SOPLIDO
+        if (DetectorRuido.instancia != null)
+        {
+            float volumen = DetectorRuido.instancia.volumenActual;
+            if (volumen > umbralSoplido)
+            {
+                calorActual -= enfriamientoAlSoplar * Time.deltaTime;
+            }
+        }
+
+        // 2. ENFRIAMIENTO NATURAL
+        calorActual -= velocidadEnfriamiento * Time.deltaTime;
+        calorActual = Mathf.Clamp(calorActual, 0f, 100f);
+
+        // 3. DESATASCAR
+        if (estaAtascada && calorActual <= 0)
+        {
+            estaAtascada = false;
+            if (humoParticulas != null) humoParticulas.Stop();
+        }
+    }
+
+    private void ActualizarHumo()
+    {
+        // Solo controlamos el humo, sin tocar colores
+        if (humoParticulas != null && !estaAtascada)
+        {
+            // Si está muy caliente (más de 50) empieza a salir un poco de humo
+            if (calorActual > 50 && !humoParticulas.isPlaying) humoParticulas.Play();
+            else if (calorActual < 50 && humoParticulas.isPlaying) humoParticulas.Stop();
+        }
+    }
+
     private void OnShoot(InputAction.CallbackContext context)
     {   
-        if ( currentBullets > 0)
+        // Si está atascada, suena click y no dispara
+        if (estaAtascada)
+        {
+            PlaySound(emptySound);
+            return;
+        }
+
+        if (currentBullets > 0)
         {
             ShootBullet();
         }
@@ -58,16 +121,25 @@ public class Disparo : MonoBehaviour
 
     private void ShootBullet()
     {
+        // Aumentar calor
+        calorActual += calorPorDisparo;
+
+        // Comprobar atasco
+        if (calorActual >= 100f)
+        {
+            estaAtascada = true;
+            if (humoParticulas != null) humoParticulas.Play(); // Humo a tope
+        }
+
+        // Disparo normal
         GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
         if (bullet.TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
             float velocidadFinal = bulletSpeed;
-
             if (movimientoJugador != null && movimientoJugador.isMoving)
             {
                 velocidadFinal += movimientoJugador.moveSpeed;
             }
-
             rb.linearVelocity = spawnPoint.forward * velocidadFinal; 
         }
         Destroy(bullet, 10f);

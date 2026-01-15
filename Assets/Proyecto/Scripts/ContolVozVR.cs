@@ -1,84 +1,143 @@
 using UnityEngine;
 using Whisper;
 using Whisper.Utils;
+using TMPro;
 
-[RequireComponent(typeof(WhisperManager))]   // Obliga a que existan estos componentes
-[RequireComponent(typeof(MicrophoneRecord))]
-[RequireComponent(typeof(RelojInteligente))]
 public class ControlVozVR : MonoBehaviour
 {
-    [Header("Conexión Automática")]
-    // Estos ya no hace falta arrastrarlos, se llenan solos en el Start
+    [Header("Referencias")]
+    public SaludJugador saludJugador;
+    public TextMeshProUGUI textoPantallaReloj;
+
+    public float tiempoGrabacion = 0.8f; 
+    public float tiempoRecarga = 15f;
+
+    // Internas
     private WhisperManager whisper;
     private MicrophoneRecord microfono;
     private RelojInteligente scriptReloj;
     
-    [Header("Conexión Externa (Arrastrar Jugador)")]
-    public SaludJugador saludJugador; // Este SÍ arrástralo manual (tu XR Origin)
+    private float cronometroGrabacion = 0f;
+    private float cronometroCooldown = 0f;
+    
+    // Estados
+    private bool estaProcesando = false; 
+    private bool enCooldown = false;
+    private bool bloqueoMirada = false; 
 
-    private bool estabaMirando = false;
-
-    private void Start()
+    private async void Start()
     {
-        // AUTOCONEXIÓN: Buscamos los componentes en este mismo objeto (El Reloj)
         whisper = GetComponent<WhisperManager>();
         microfono = GetComponent<MicrophoneRecord>();
         scriptReloj = GetComponent<RelojInteligente>();
-
-        // Nos suscribimos al evento de Whisper
+        
+        // 1. FORZAMOS CONFIGURACIÓN RÁPIDA
+        whisper.language = "es"; // Español forzado
+        
+        // 2. PRE-CARGA DEL CEREBRO
+        ActualizarPantalla("CARGANDO...");
+        try { await whisper.InitModel(); } catch {}
+        
         microfono.OnRecordStop += AlTerminarGrabacion;
+        
+        if (saludJugador == null) ActualizarPantalla("ERROR LINK");
+        else ActualizarPantalla("LISTO");
     }
 
     private void Update()
     {
-        // Si por algún motivo falló la conexión, no hacemos nada
         if (scriptReloj == null || microfono == null) return;
 
-        // Leemos la variable pública del otro script
+        // FASE 1: COOLDOWN
+        if (enCooldown)
+        {
+            cronometroCooldown -= Time.deltaTime;
+            // Solo actualizamos el texto cada segundo para ahorrar recursos
+            if (cronometroCooldown <= 0)
+            {
+                enCooldown = false;
+                ActualizarPantalla("LISTO");
+                bloqueoMirada = true;
+            }
+            else
+            {
+                 ActualizarPantalla($"{Mathf.CeilToInt(cronometroCooldown)}");
+            }
+            return;
+        }
+
+        if (estaProcesando) return;
+
         bool mirandoAhora = scriptReloj.elJugadorMeMira;
+        if (!mirandoAhora) bloqueoMirada = false;
 
-        // --- LÓGICA DE ACTIVACIÓN ---
-        
-        // 1. Al empezar a mirar -> GRABAR
-        if (mirandoAhora && !estabaMirando)
+        // --- GRABAR (SIN TEXTO PARA IR MÁS RÁPIDO) ---
+        if (mirandoAhora && !microfono.IsRecording && !bloqueoMirada)
         {
-            if (!microfono.IsRecording)
-            {
-                microfono.StartRecord();
-                Debug.Log("Reloj: Escuchando voz...");
-            }
+            microfono.StartRecord();
+            cronometroGrabacion = 0f;
+            ActualizarPantalla("🎤"); // Solo un icono, feedback instantáneo
         }
 
-        // 2. Al dejar de mirar -> PROCESAR
-        if (!mirandoAhora && estabaMirando)
+        if (microfono.IsRecording)
         {
-            if (microfono.IsRecording)
+            cronometroGrabacion += Time.deltaTime;
+
+            // CORTE STRICTO POR TIEMPO O MIRADA
+            if (cronometroGrabacion >= tiempoGrabacion || !mirandoAhora)
             {
-                microfono.StopRecord();
-                Debug.Log("Reloj: Procesando...");
+                microfono.StopRecord(); 
+                estaProcesando = true; 
+                bloqueoMirada = true;
+                ActualizarPantalla("⚡"); // Icono de rayo (procesando)
             }
         }
-
-        estabaMirando = mirandoAhora;
     }
 
     private async void AlTerminarGrabacion(AudioChunk audio)
     {
+        if (whisper == null) { estaProcesando = false; return; }
+
         var resultado = await whisper.GetTextAsync(audio.Data, audio.Frequency, audio.Channels);
         
         if (resultado == null || string.IsNullOrEmpty(resultado.Result)) 
+        {
+            ActualizarPantalla("?"); // No entendió
+            Invoke("VolverAListo", 0.5f);
             return;
+        }
 
         string texto = resultado.Result.ToLower();
-        Debug.Log("Whisper oyó: " + texto);
 
-        // Palabras clave
+        // Chequeo de palabra clave
         if (texto.Contains("escudo") || texto.Contains("protec") || texto.Contains("defensa")) 
         {
             if (saludJugador != null)
             {
-                saludJugador.ActivarInmunidadTemporal(5f);
+                // ¡ACCIÓN INMEDIATA!
+                ActualizarPantalla("ESCUDO");
+                saludJugador.ActivarInmunidadTemporal(5f); 
+                enCooldown = true;
+                cronometroCooldown = tiempoRecarga;
             }
         }
+        else
+        {
+            ActualizarPantalla("X");
+            Invoke("VolverAListo", 0.5f);
+            return;
+        }
+        estaProcesando = false;
+    }
+
+    void VolverAListo()
+    {
+        estaProcesando = false;
+        if (!enCooldown) ActualizarPantalla("LISTO");
+    }
+
+    void ActualizarPantalla(string mensaje)
+    {
+        if (textoPantallaReloj != null) textoPantallaReloj.text = mensaje;
     }
 }

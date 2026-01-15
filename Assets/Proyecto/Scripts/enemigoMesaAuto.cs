@@ -23,7 +23,6 @@ public class EnemigoMesaAuto : MonoBehaviour
         // Recorremos cada plataforma que arrastraste y buscamos su hijo "SpawnPoint"
         foreach (GameObject mesa in plataformas)
         {
-            // Busca un hijo con ESTE nombre exacto (como en tu imagen)
             Transform puntoEncontrado = mesa.transform.Find("SpawnPoint");
 
             if (puntoEncontrado != null)

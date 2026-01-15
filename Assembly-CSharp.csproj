@@ -59,6 +59,7 @@
     <Compile Include="Assets\Proyecto\Scripts\Disparo.cs" />
     <Compile Include="Assets\Human Animations\Unity Demo Scenes\Human Soldier Animations\Scripts\HumanSoldierController.cs" />
     <Compile Include="Assets\Proyecto\Scripts\TriggerZone.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\enemigoMesaAuto.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Proyecto\Scripts\SpawnerEnemy.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Proyecto\Scripts\PuertaTrigger.cs" />
     <Compile Include="Assets\Human Animations\Unity Demo Scenes\Human Soldier Animations\Scripts\HumanSoldierChangeWeaponSMB.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\ActivadorZonaFInal.cs" />
     <Compile Include="Assets\Proyecto\Scripts\DetectarGolpe.cs" />
   </ItemGroup>
   <ItemGroup>

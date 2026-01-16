@@ -151,7 +151,6 @@ public class Disparo : MonoBehaviour
         Destroy(bullet, 10f);
         currentBullets--;
         
-        if(relojRef) relojRef.ActualizarBalas(currentBullets, maxBullets);
         
         PlaySound(shootSound);
     }

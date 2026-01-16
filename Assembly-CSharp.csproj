@@ -59,7 +59,6 @@
     <Compile Include="Assets\Human Animations\Unity Demo Scenes\Human Soldier Animations\Scripts\HumanSoldierController.cs" />
     <Compile Include="Assets\Proyecto\Scripts\ZonaDesactivarEfectos.cs" />
     <Compile Include="Assets\Proyecto\Scripts\TriggerZone.cs" />
-    <Compile Include="Assets\Proyecto\Scripts\TunelMovimiento.cs" />
     <Compile Include="Assets\Proyecto\Scripts\enemigoMesaAuto.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
@@ -93,7 +92,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Proyecto\Scripts\EventoTrigger.cs" />
-    <Compile Include="Assets\Proyecto\Scripts\EnemigoCiego.cs" />
     <Compile Include="Assets\Proyecto\Scripts\RecargaGesto.cs" />
     <Compile Include="Assets\Proyecto\Scripts\DetectorRuido.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
@@ -105,7 +103,6 @@
     <Compile Include="Assets\Proyecto\Scripts\RelojInteligente.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
-    <Compile Include="Assets\Proyecto\Scripts\InvertirEsfera.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />

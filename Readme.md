@@ -138,6 +138,7 @@ private void Start()
 
 ### **Gif animado de ejecución.**
 
+https://github.com/user-attachments/assets/3ed727f7-d5c9-4cd6-9303-15cf088ca543
 
 ---
 

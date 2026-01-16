@@ -57,24 +57,29 @@
     <Compile Include="Assets\Proyecto\Scripts\AlDañarEnviarA.cs" />
     <Compile Include="Assets\Proyecto\Scripts\Disparo.cs" />
     <Compile Include="Assets\Human Animations\Unity Demo Scenes\Human Soldier Animations\Scripts\HumanSoldierController.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\ZonaDesactivarEfectos.cs" />
     <Compile Include="Assets\Proyecto\Scripts\TriggerZone.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\TunelMovimiento.cs" />
     <Compile Include="Assets\Proyecto\Scripts\enemigoMesaAuto.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Proyecto\Scripts\SpawnerEnemy.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\BossLife.cs" />
     <Compile Include="Assets\Proyecto\Scripts\RestEnemyManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Proyecto\Scripts\EnemyLife.cs" />
     <Compile Include="Assets\Proyecto\Scripts\SaludJugador.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\EnviarA.cs" />
     <Compile Include="Assets\Proyecto\Scripts\LookAtPlayer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Human Animations\Scripts\SpineProxy.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\GeneradorEnemigos.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Proyecto\Scripts\Movimiento personaje.cs" />
@@ -82,17 +87,18 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
-    <Compile Include="Assets\Proyecto\Scripts\ContolVozVR.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\GolpeReloj.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\EventoTrigger.cs" />
     <Compile Include="Assets\Proyecto\Scripts\EnemigoCiego.cs" />
     <Compile Include="Assets\Proyecto\Scripts\RecargaGesto.cs" />
     <Compile Include="Assets\Proyecto\Scripts\DetectorRuido.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\Kamikaze.cs" />
     <Compile Include="Assets\UI pack\Scripts\FillValueNumber.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
@@ -107,7 +113,7 @@
     <Compile Include="Assets\Proyecto\Scripts\PuertaTrigger.cs" />
     <Compile Include="Assets\Human Animations\Unity Demo Scenes\Human Soldier Animations\Scripts\HumanSoldierChangeWeaponSMB.cs" />
     <Compile Include="Assets\Proyecto\Scripts\ActivadorZonaFInal.cs" />
-    <Compile Include="Assets\Proyecto\Scripts\DetectarGolpe.cs" />
+    <Compile Include="Assets\Proyecto\Scripts\OcultarPorTiempo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shield Shader FREE\Pink Material Issue.txt" />
@@ -1215,12 +1221,12 @@
       <HintPath>Library\ScriptAssemblies\Meta.XR.Editor.UserInterface.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Meta.Wit.Composer.Editor">
-      <HintPath>Library\ScriptAssemblies\Meta.Wit.Composer.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>Library\ScriptAssemblies\UnityEngine.SpatialTracking.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Meta.Wit.Composer.Editor">
+      <HintPath>Library\ScriptAssemblies\Meta.Wit.Composer.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Rendering.LightTransport.Editor">

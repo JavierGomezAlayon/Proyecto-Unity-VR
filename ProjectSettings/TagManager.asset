@@ -8,6 +8,8 @@ TagManager:
   - ManageEnemyCount
   - Enemy
   - "AlDa\xF1arEnviarA"
+  - ManoIzquierda
+  - ManoDerecha
   layers:
   - Default
   - TransparentFX

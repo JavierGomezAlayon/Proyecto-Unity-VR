@@ -2,41 +2,51 @@ using UnityEngine;
 
 public class Balabehaviour : MonoBehaviour
 {
-    public float damage = 10f; // Daño que inflige la bala
-    public GameObject collisionParticleEffect; // Particula de impacto
+    public float damage = 10f;
+    public GameObject collisionParticleEffect;
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Verificamos si el objeto impactado tiene el componente EnemyLife
+        // 1. COMPROBAR SI ES UN ENEMIGO NORMAL
         EnemyLife enemy = collision.gameObject.GetComponent<EnemyLife>();
-
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
             Debug.Log("Impacto físico detectado en enemigo");
             ParticulasImpacto();
             Destroy(gameObject);
-        } else if (collision.gameObject.CompareTag("Entorno"))
+            return;
+        }
+
+        // 2. COMPROBAR SI ES EL BOSS (¡ESTO FALTABA!)
+        BossLife boss = collision.gameObject.GetComponent<BossLife>();
+        if (boss != null)
         {
+            boss.TakeDamage(damage); // Le quitamos vida al Boss
+            Debug.Log("Impacto físico detectado en BOSS");
             ParticulasImpacto();
             Destroy(gameObject);
+            return;
         }
-        else if (collision.gameObject.CompareTag("AlDañarEnviarA"))
+
+        // 3. COMPROBAR SI ES UN TRIGGER DE CAMBIO DE ESCENA
+        if (collision.gameObject.CompareTag("AlDañarEnviarA"))
         {
             AlDañarEnviarA damageTrigger = collision.gameObject.GetComponent<AlDañarEnviarA>();
             if (damageTrigger != null)
             {
                 damageTrigger.TakeDamage(damage);
-                Debug.Log("Impacto físico detectado en trigger de daño");
                 ParticulasImpacto();
                 Destroy(gameObject);
-            } else {
-                Debug.LogWarning("El objeto con tag 'AlDañarEnviarA' no tiene el componente AlDañarEnviarA.");
+                return;
             }
         }
 
-        // Destruimos la bala al impactar contra cualquier cosa y opcionalmente instanciamos un efecto de partículas
-        
+        // 4. COMPROBAR SI ES ENTORNO (PAREDES, SUELO)
+        if (collision.gameObject.CompareTag("Entorno"))
+        {
+            ParticulasImpacto();
+        }
     }
 
     private void ParticulasImpacto()

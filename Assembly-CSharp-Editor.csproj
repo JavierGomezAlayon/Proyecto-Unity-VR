@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\Angel_Knight_Anims\Skybox\Skybox Shaders\Editor\RgbmCubedSkyboxInspector.cs" />
+    <Compile Include="Assets\Angel_Knight_Anims\Skybox\Skybox Shaders\Editor\HorizonWithSunSkyboxInspector.cs" />
+    <Compile Include="Assets\Angel_Knight_Anims\Skybox\Skybox Shaders\Editor\GradientSkyboxInspector.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

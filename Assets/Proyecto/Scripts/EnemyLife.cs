@@ -61,6 +61,15 @@ public class EnemyLife : MonoBehaviour
             scriptEnemyCounter.EnemyDefeated();
         }
 
+        Kamikaze kamikazeScript = GetComponent<Kamikaze>();
+    
+        if (kamikazeScript != null)
+        {
+            // Si es un kamikaze, que explote él (y salimos de esta función)
+            kamikazeScript.Detonar();
+            return; 
+        }
+
         // 2. Efectos visuales (Partículas)
         if (deathEffectPrefab != null)
         {

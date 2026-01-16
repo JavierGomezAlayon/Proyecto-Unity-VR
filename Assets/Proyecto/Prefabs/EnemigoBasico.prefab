@@ -1568,7 +1568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyLife
   health: 10
   destroyOnDeath: 1
-  deathEffectPrefab: {fileID: 0}
+  deathEffectPrefab: {fileID: 2787556212050310887, guid: 57970c6bb711ec24b8d98424b1806f3b, type: 3}
 --- !u!136 &8475609916720705808
 CapsuleCollider:
   m_ObjectHideFlags: 0

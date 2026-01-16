@@ -5,7 +5,7 @@ public class Disparo : MonoBehaviour
 {
     [Header("Input")]
     public InputActionProperty shootAction;
-
+    
     [Header("Referencias Externas")]
     public RelojInteligente relojRef;
     public Movimientopersonaje movimientoJugador;
@@ -31,8 +31,8 @@ public class Disparo : MonoBehaviour
     public float umbralSoplido = 0.2f;       
     public float enfriamientoAlSoplar = 80f; 
 
-    [Header("Visuales Atasco (Solo Humo)")]
-    public ParticleSystem humoParticulas; // Solo humo, nada de colores
+    [Header("Visuales Atasco")]
+    public ParticleSystem humoParticulas;
     
     // Variables internas
     private float calorActual = 0f;
@@ -67,7 +67,7 @@ public class Disparo : MonoBehaviour
 
     private void GestionarTemperatura()
     {
-        // 1. DETECTAR SOPLIDO
+        // 1. DETECTAR SOPLIDO (Para enfriar)
         if (DetectorRuido.instancia != null)
         {
             float volumen = DetectorRuido.instancia.volumenActual;
@@ -82,27 +82,29 @@ public class Disparo : MonoBehaviour
         calorActual = Mathf.Clamp(calorActual, 0f, 100f);
 
         // 3. DESATASCAR
+        // Solo se desatasca si baja a 0 totalmente
         if (estaAtascada && calorActual <= 0)
         {
             estaAtascada = false;
-            if (humoParticulas != null) humoParticulas.Stop();
         }
     }
 
     private void ActualizarHumo()
     {
-        // Solo controlamos el humo, sin tocar colores
-        if (humoParticulas != null && !estaAtascada)
+        if (humoParticulas != null)
         {
-            // Si está muy caliente (más de 50) empieza a salir un poco de humo
-            if (calorActual > 50 && !humoParticulas.isPlaying) humoParticulas.Play();
-            else if (calorActual < 50 && humoParticulas.isPlaying) humoParticulas.Stop();
+            // CAMBIO AQUÍ: El humo SOLO sale si está REALMENTE atascada.
+            // Ya no sale como "advertencia" al 50%.
+            bool debeHaberHumo = estaAtascada;
+
+            if (debeHaberHumo && !humoParticulas.isPlaying) humoParticulas.Play();
+            else if (!debeHaberHumo && humoParticulas.isPlaying) humoParticulas.Stop();
         }
     }
 
     private void OnShoot(InputAction.CallbackContext context)
     {   
-        // Si está atascada, suena click y no dispara
+        // Bloqueo total si está atascada
         if (estaAtascada)
         {
             PlaySound(emptySound);
@@ -121,17 +123,25 @@ public class Disparo : MonoBehaviour
 
     private void ShootBullet()
     {
-        // Aumentar calor
-        calorActual += calorPorDisparo;
-
-        // Comprobar atasco
-        if (calorActual >= 100f)
+        // --- LÓGICA PREDICTIVA ---
+        // Comprobamos si con este disparo llegaríamos al límite (100)
+        if (calorActual + calorPorDisparo >= 100f)
         {
-            estaAtascada = true;
-            if (humoParticulas != null) humoParticulas.Play(); // Humo a tope
+            // SI SE VA A PASAR:
+            calorActual = 100f;     // Ponemos el calor al máximo
+            estaAtascada = true;    // Declaramos el atasco
+            
+            // Forzamos que el humo salga YA, en este mismo frame
+            ActualizarHumo(); 
+            
+            PlaySound(emptySound);  // Suena el "click" de fallo
+            
+            return; // <--- IMPORTANTE: Se sale de la función AQUÍ. NO DISPARA.
         }
 
-        // Disparo normal
+        // Si no se va a pasar, dispara normalmente:
+        calorActual += calorPorDisparo;
+
         GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
         if (bullet.TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
@@ -142,9 +152,12 @@ public class Disparo : MonoBehaviour
             }
             rb.linearVelocity = spawnPoint.forward * velocidadFinal; 
         }
+        
         Destroy(bullet, 10f);
         currentBullets--;
+        
         if(relojRef) relojRef.ActualizarBalas(currentBullets, maxBullets);
+        
         PlaySound(shootSound);
     }
     

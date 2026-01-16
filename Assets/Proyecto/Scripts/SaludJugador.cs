@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections; // <--- IMPORTANTE: Necesario para IEnumerator
+using UnityEngine.SceneManagement;
 
 public class SaludJugador : MonoBehaviour
 {
@@ -33,15 +34,17 @@ public class SaludJugador : MonoBehaviour
 
         vidaActual -= daño;
 
-        if (vidaActual < 0) vidaActual = 0;
+        if (vidaActual <= 0) {
+            vidaActual = 0;
+            SceneManager.LoadScene("GameOver");
+        }
         if(relojRef) relojRef.ActualizarVida(vidaActual);
     }
 
     
-    // Esta función será llamada por la voz
     public void ActivarInmunidadTemporal(float duracion)
     {
-        if (!esInvulnerable) // Solo si no lo tienes ya activado
+        if (!esInvulnerable)
         {
             StartCoroutine(RutinaInmunidad(duracion));
         }
@@ -53,7 +56,7 @@ public class SaludJugador : MonoBehaviour
         esInvulnerable = true;
         Debug.Log(">>> ESCUDO ACTIVADO <<<");
 
-        // Activamos efecto visual (burbuja) si existe
+        // Activamos efecto visual
         if (efectoEscudo) efectoEscudo.SetActive(true);
 
         // Esperamos X segundos

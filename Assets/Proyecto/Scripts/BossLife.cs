@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement; // <--- NECESARIO PARA CAMBIAR DE ESCENA
+using UnityEngine.SceneManagement;
 
+// Script que maneja la vida del jefe final
 public class BossLife : MonoBehaviour
 {
     [Header("Ajustes de Salud")]
@@ -27,7 +28,7 @@ public class BossLife : MonoBehaviour
         if (isDead) return;
 
         health -= amount;
-        animator.SetTrigger("Herido");
+        animator.SetTrigger("Herido"); // Para la animación de recibir daño
 
         if (health <= 0f)
         {
@@ -53,14 +54,13 @@ public class BossLife : MonoBehaviour
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
 
+        // Cuando se mata al jefe, te lleva al menu
         StartCoroutine(GoToMenuRoutine());
     }
 
     IEnumerator GoToMenuRoutine()
     {
         Debug.Log("El Boss ha muerto. Esperando " + delayBeforeLoading + " segundos...");
-        
-        // Esperamos a que termine la animación dramática
         yield return new WaitForSeconds(delayBeforeLoading);
 
         // Cargamos la escena

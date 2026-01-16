@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Script que gestiona el gesto para recargar el arma
 public class RecargaGesto : MonoBehaviour
 {
     public Disparo disparoScript;
@@ -16,15 +17,12 @@ public class RecargaGesto : MonoBehaviour
 
     void Update()
     {
-        // 1. Averiguamos hacia dónde apunta la pistola
-        // Vector3.down es el suelo del mundo (0, -1, 0)
-        // transform.forward es la flecha azul de tu pistola
-        
+        // Averiguamos hacia dónde apunta la pistola
         // El "Producto Punto" (Dot) nos dice si dos direcciones coinciden.
         // Si es 1, miran igual. Si es -1, miran opuesto.
         float inclinacion = Vector3.Dot(transform.forward, Vector3.down);
 
-        // 2. Comprobamos si miramos al suelo
+        // Comprobamos si miramos al suelo
         // Si 'inclinacion' es mayor que el umbral (ej: 0.7), es que estás apuntando abajo
         if (inclinacion > anguloNecesario)
         {

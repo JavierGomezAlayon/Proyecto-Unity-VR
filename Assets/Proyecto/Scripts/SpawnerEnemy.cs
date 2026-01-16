@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Spawn de enemigos en la fase de jefe final
 public class SpawnerEnemy : MonoBehaviour
 {
     [Header("Referencia al Trigger de inicio")]

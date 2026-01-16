@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Script para la eleccion de niveles y volver al menú
 public class AlDañarEnviarA : MonoBehaviour
 {
     public string SceneName;

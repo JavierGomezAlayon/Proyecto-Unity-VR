@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Script para gestionar el disparo
 public class Disparo : MonoBehaviour
 {
     [Header("Input")]
@@ -25,13 +26,11 @@ public class Disparo : MonoBehaviour
 
     public GameObject collisionParticleEffect;
 
-    [Header("--- SISTEMA DE ATASCO ---")]
+    [Header("Atasco")]
     public float calorPorDisparo = 20f;      
     public float velocidadEnfriamiento = 5f; 
     public float umbralSoplido = 0.2f;       
     public float enfriamientoAlSoplar = 80f; 
-
-    [Header("Visuales Atasco")]
     public ParticleSystem humoParticulas;
     
     // Variables internas
@@ -67,7 +66,7 @@ public class Disparo : MonoBehaviour
 
     private void GestionarTemperatura()
     {
-        // 1. DETECTAR SOPLIDO (Para enfriar)
+        // DETECTAR SOPLIDO (Para enfriar)
         if (DetectorRuido.instancia != null)
         {
             float volumen = DetectorRuido.instancia.volumenActual;
@@ -77,11 +76,11 @@ public class Disparo : MonoBehaviour
             }
         }
 
-        // 2. ENFRIAMIENTO NATURAL
+        // ENFRIAMIENTO NATURAL por si el usuario no sopla
         calorActual -= velocidadEnfriamiento * Time.deltaTime;
         calorActual = Mathf.Clamp(calorActual, 0f, 100f);
 
-        // 3. DESATASCAR
+        // DESATASCAR
         // Solo se desatasca si baja a 0 totalmente
         if (estaAtascada && calorActual <= 0)
         {
@@ -93,8 +92,6 @@ public class Disparo : MonoBehaviour
     {
         if (humoParticulas != null)
         {
-            // CAMBIO AQUÍ: El humo SOLO sale si está REALMENTE atascada.
-            // Ya no sale como "advertencia" al 50%.
             bool debeHaberHumo = estaAtascada;
 
             if (debeHaberHumo && !humoParticulas.isPlaying) humoParticulas.Play();
@@ -123,20 +120,18 @@ public class Disparo : MonoBehaviour
 
     private void ShootBullet()
     {
-        // --- LÓGICA PREDICTIVA ---
         // Comprobamos si con este disparo llegaríamos al límite (100)
         if (calorActual + calorPorDisparo >= 100f)
         {
             // SI SE VA A PASAR:
             calorActual = 100f;     // Ponemos el calor al máximo
-            estaAtascada = true;    // Declaramos el atasco
+            estaAtascada = true;
             
             // Forzamos que el humo salga YA, en este mismo frame
             ActualizarHumo(); 
+            PlaySound(emptySound);
             
-            PlaySound(emptySound);  // Suena el "click" de fallo
-            
-            return; // <--- IMPORTANTE: Se sale de la función AQUÍ. NO DISPARA.
+            return;
         }
 
         // Si no se va a pasar, dispara normalmente:

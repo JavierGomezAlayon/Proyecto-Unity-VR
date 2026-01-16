@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Script para abrir y cerrar la puerta con un trigger
 public class PuertaTrigger : MonoBehaviour
 {
     public Animator doorAnimator;

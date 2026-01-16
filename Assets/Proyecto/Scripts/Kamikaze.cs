@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 
+// Script para controlar el enemigo kamikaze
 public class Kamikaze : MonoBehaviour
 {
     private Transform objetivo; 
@@ -71,7 +72,6 @@ public class Kamikaze : MonoBehaviour
             // Le hacemos daño infinito para forzar la muerte
             miVida.TakeDamage(99999f); 
         }
-        // -----------------------------
 
         // Efectos
         if (efectoExplosionPrefab != null) Instantiate(efectoExplosionPrefab, transform.position, Quaternion.identity);

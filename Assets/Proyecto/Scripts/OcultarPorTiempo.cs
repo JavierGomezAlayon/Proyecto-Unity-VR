@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+// Script para ocultar los mensajes de gameover y you win
 public class OcultarPorTiempo : MonoBehaviour
 {
     [Header("¿Cuánto tiempo esperas?")]

@@ -1,7 +1,8 @@
 using UnityEngine;
-using System.Collections; // <--- IMPORTANTE: Necesario para IEnumerator
+using System.Collections;
 using UnityEngine.SceneManagement;
 
+// Manejo de la vida del jugador
 public class SaludJugador : MonoBehaviour
 {
     public int vidaMaxima = 100;

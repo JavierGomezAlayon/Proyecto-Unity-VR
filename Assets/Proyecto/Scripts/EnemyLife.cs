@@ -51,7 +51,7 @@ public class EnemyLife : MonoBehaviour
     {
         isDead = true;
 
-        // 1. Notificar al manager
+        // Notificar al manager
         if (scriptEnemyCounter == null && enemyManager != null)
         {
             scriptEnemyCounter = enemyManager.GetComponent<RestEnemyManager>();
@@ -70,23 +70,22 @@ public class EnemyLife : MonoBehaviour
             return; 
         }
 
-        // 2. Efectos visuales (Partículas)
         if (deathEffectPrefab != null)
         {
             Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
         }
 
-        // 3. ANIMACIÓN DE MUERTE
+        // ANIMACIÓN DE MUERTE
         if (animator != null)
         {
             animator.SetTrigger("Morir");
         }
 
-        // 4. Desactivar colisiones para que no bloquee balas ni al jugador mientras cae
+        // Desactivar colisiones para que no bloquee balas ni al jugador mientras cae
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
 
-        // 5. Destruir el objeto con retraso (para que se vea la animación)
+        // Destruir el objeto con retraso (para que se vea la animación)
         if (destroyOnDeath)
         {
             Destroy(gameObject, 5f); 

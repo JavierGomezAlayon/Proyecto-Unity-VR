@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.Rendering; // <--- Necesario para acceder al Volume
 
+// Zona para desactivar el efecto tunel cuando el jugador se para
 public class ZonaDesactivarEfectos : MonoBehaviour
 {
     [Header("Arrastra aquí tu Global Volume")]
     public Volume globalVolume;
 
     [Header("Configuración")]
-    public string tagJugador = "Player"; // Asegúrate de que tu XR Origin tenga este Tag
+    public string tagJugador = "Player";
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,18 +21,6 @@ public class ZonaDesactivarEfectos : MonoBehaviour
                 globalVolume.enabled = false;
                 
                 Debug.Log("¡El jugador ha llegado a la zona! Volumen desactivado.");
-            }
-        }
-    }
-
-    // Opcional: Si quieres que se vuelva a activar si sale de la zona
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag(tagJugador))
-        {
-            if (globalVolume != null)
-            {
-                globalVolume.enabled = true;
             }
         }
     }

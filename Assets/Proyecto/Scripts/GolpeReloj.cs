@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 
+// Script para gestionar el golpe del reloj
 public class GolpeReloj : MonoBehaviour
 {
     [Header("Referencias")]
@@ -28,7 +29,7 @@ public class GolpeReloj : MonoBehaviour
         {
             cronometro -= Time.deltaTime;
             
-            // Mostramos el tiempo restante (sin decimales)
+            // Mostramos el tiempo restante
             ActualizarTexto($"{Mathf.CeilToInt(cronometro)}s");
 
             if (cronometro <= 0)
@@ -39,13 +40,13 @@ public class GolpeReloj : MonoBehaviour
         }
     }
 
-    // --- DETECCIÓN DE GOLPE FÍSICO ---
+    // DETECCIÓN DE GOLPE FÍSICO 
     private void OnTriggerEnter(Collider other)
     {
-        // 1. Si estamos recargando, ignoramos el golpe
+        // Si estamos recargando, ignoramos el golpe
         if (enCooldown) return;
 
-        // 2. Comprobamos si lo que ha tocado el reloj es la mano derecha
+        // Comprobamos si lo que ha tocado el reloj es la mano
         if (other.CompareTag(tagManoGolpeadora))
         {
             ActivarHabilidad();
@@ -58,7 +59,7 @@ public class GolpeReloj : MonoBehaviour
         {
             Debug.Log(">>> ¡GOLPE DETECTADO! ESCUDO ACTIVO <<<");
             
-            // Llamamos a tu script de salud
+            // Llamamos al script de salud
             saludJugador.ActivarInmunidadTemporal(duracionEscudo);
             
             // Iniciamos el cooldown

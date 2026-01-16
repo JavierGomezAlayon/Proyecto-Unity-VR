@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Script para que el jugador pare en frente del enemigo final
 public class ActivadorZonaFinal : MonoBehaviour
 {
     [Header("Arrastra aquí a tu Enemigo")]
@@ -8,7 +9,6 @@ public class ActivadorZonaFinal : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Verificamos si lo que entró es el Jugador
-        // Asegúrate de que tu jugador tenga el Tag "Player"
         if (other.CompareTag("Player"))
         {
             // Activamos al enemigo. Esto dispara su función Start() y empieza la lógica.

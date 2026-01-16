@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+// Script general para eventos con trigger
 public class EventoTrigger : MonoBehaviour
 {
     [Header("Configuración")]

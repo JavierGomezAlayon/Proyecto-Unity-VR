@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Script para detectar el ruido del micrófono
 public class DetectorRuido : MonoBehaviour
 {
     public static DetectorRuido instancia;
@@ -7,7 +8,7 @@ public class DetectorRuido : MonoBehaviour
     [Header("Configuración")]
     [Tooltip("Multiplicador para ajustar la sensibilidad")]
     public float sensibilidad = 50; 
-    public float volumenActual { get; private set; } // Los enemigos leerán esto
+    public float volumenActual { get; private set; }
 
     private AudioClip clipMicrofono;
     private string microfonoNombre;

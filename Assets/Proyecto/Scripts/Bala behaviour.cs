@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Script que controla el comportamiento de la bala
 public class Balabehaviour : MonoBehaviour
 {
     public float damage = 10f;
@@ -7,7 +8,7 @@ public class Balabehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // 1. COMPROBAR SI ES UN ENEMIGO NORMAL
+        // COMPROBAR SI ES UN ENEMIGO NORMAL
         EnemyLife enemy = collision.gameObject.GetComponent<EnemyLife>();
         if (enemy != null)
         {
@@ -18,7 +19,7 @@ public class Balabehaviour : MonoBehaviour
             return;
         }
 
-        // 2. COMPROBAR SI ES EL BOSS (¡ESTO FALTABA!)
+        // COMPROBAR SI ES EL BOSS
         BossLife boss = collision.gameObject.GetComponent<BossLife>();
         if (boss != null)
         {
@@ -29,7 +30,7 @@ public class Balabehaviour : MonoBehaviour
             return;
         }
 
-        // 3. COMPROBAR SI ES UN TRIGGER DE CAMBIO DE ESCENA
+        // COMPROBAR SI ES UN TRIGGER DE CAMBIO DE ESCENA
         if (collision.gameObject.CompareTag("AlDañarEnviarA"))
         {
             AlDañarEnviarA damageTrigger = collision.gameObject.GetComponent<AlDañarEnviarA>();
@@ -42,13 +43,14 @@ public class Balabehaviour : MonoBehaviour
             }
         }
 
-        // 4. COMPROBAR SI ES ENTORNO (PAREDES, SUELO)
+        // COMPROBAR SI ES ENTORNO (PAREDES, SUELO)
         if (collision.gameObject.CompareTag("Entorno"))
         {
             ParticulasImpacto();
         }
     }
 
+    // Mostrar el efecto de impacto
     private void ParticulasImpacto()
     {
         if (collisionParticleEffect != null)

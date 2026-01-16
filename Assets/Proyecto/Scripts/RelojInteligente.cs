@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI; 
 using UnityEngine.SceneManagement;
 
+// Script de comportamiento del reloj
 public class RelojInteligente : MonoBehaviour
 {
     [Header("Configuración UI Texto")]
@@ -18,13 +19,12 @@ public class RelojInteligente : MonoBehaviour
     public Color colorSaludBaja = Color.red;
 
     [Header("Configuración Game Over")]
-    public string nombreEscenaGameOver = "GameOver"; // Asegúrate del nombre exacto
+    public string nombreEscenaGameOver = "GameOver";
 
     [Header("Configuración Gesto")]
     public Transform cabezaJugador; 
     public float umbralMirada = 0.7f; 
 
-    // --- ESTA ES LA VARIABLE QUE NECESITA EL OTRO SCRIPT ---
     public bool elJugadorMeMira { get; private set; } 
     // -------------------------------------------------------
 
@@ -59,11 +59,6 @@ public class RelojInteligente : MonoBehaviour
         {
             pantallaCanvas.SetActive(elJugadorMeMira);
         }
-    }
-
-    public void ActualizarBalas(int actuales, int maximas)
-    {
-        if(textoBalas) textoBalas.text = $"{actuales}/{maximas}";
     }
 
     public void ActualizarVida(int vidaActual)

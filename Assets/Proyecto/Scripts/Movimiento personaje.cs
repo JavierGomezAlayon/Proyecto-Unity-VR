@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Script para el movimiento del jugador
 public class Movimientopersonaje : MonoBehaviour
 {
     [Header("Configuración de Velocidad")]

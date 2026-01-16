@@ -1,10 +1,7 @@
 using UnityEngine;
-
-
+// Manejo de enemigos en la escena
 public class RestEnemyManager : MonoBehaviour
 {
-    // no quiero que se visible en el inspector
-    //[HideInInspector]
     public int enemyCount = 0;
 
     public void AddEnemy()

@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 
+// Lógica del trigger final de la escena
 public class TriggerFinal : MonoBehaviour
 {
     private string playerTag = "Player";

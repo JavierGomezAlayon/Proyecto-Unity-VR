@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Script para enviar al jugador a otra escena con un trigger
 public class EnviarA : MonoBehaviour
 {
     [Header("Configuración")]

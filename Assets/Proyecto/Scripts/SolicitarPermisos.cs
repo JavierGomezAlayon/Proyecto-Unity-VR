@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Android; // Necesario para gestionar permisos de Android
 #endif
 
+// Gestión de permisos de micrófono
 public class SolicitarPermisos : MonoBehaviour
 {
     void Awake()

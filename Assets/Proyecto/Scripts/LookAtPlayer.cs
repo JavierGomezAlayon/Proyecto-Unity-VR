@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Script para que los enemigos miren al jugador
 public class LookAtPlayer : MonoBehaviour
 {
     [Header("Configuración")]
@@ -27,14 +28,14 @@ public class LookAtPlayer : MonoBehaviour
 
     void Update()
     {
-        // 1. Si no hay jugador o el enemigo ha muerto, no hacemos nada
+        // Si no hay jugador o el enemigo ha muerto, no hacemos nada
         if (playerTransform == null || (vidaScript != null && vidaScript.health <= 0)) 
             return;
 
-        // 2. Calculamos la distancia
+        // Calculamos la distancia
         float distancia = Vector3.Distance(transform.position, playerTransform.position);
 
-        // 3. Lógica de animación y rotación
+        // Lógica de animación y rotación
         if (distancia <= rangoAtaque)
         {
             // ESTAMOS EN RANGO: Apuntamos y activamos animación de ataque

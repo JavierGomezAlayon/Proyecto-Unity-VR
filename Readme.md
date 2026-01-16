@@ -17,7 +17,7 @@ Nosotros hemos realizado un juego de disparos en el que el personaje (jugador) v
 
 * **Hitos de programación logrados relacionándolos con los contenidos que se han impartido.**
 
-
+Nosotros hemos hecho uso de las físicas que nos proporciona Unity para realizar este juego, aparte del uso de eventos para gestionar las diferentes mecanicas de manera eficiente y sencilla. También hemos utilizado varios elementos de la asset store para decorar y ambientar el juego junto con el uso de la herramienta de XR Interaction Toolkit para adaptar los controles de las gafas de meta al juego.
 
 
 ### **Aspectos que destacarías en la aplicación**

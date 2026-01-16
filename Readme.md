@@ -40,7 +40,6 @@ Hemos relizado varios tipos de enemigos y diferentes niveles cada uno con mayor 
 
 
 
-
 ```c
 public class RecargaGesto : MonoBehaviour
 {
@@ -90,8 +89,7 @@ public class RecargaGesto : MonoBehaviour
 
 
 * **Microfono**
-   correspondiente, la lógica que hemos utilizado se define a continuación:
- Nosotros hemos empleado el microfono para soplar el arma en caso de que esta se sobrecaliente si se llega a disparar una cantidad establecida de balas, si se supera dicho límite se debe soplar la boquilla del arma 
+ Nosotros hemos empleado el microfono para soplar el arma en caso de que esta se sobrecaliente si se llega a disparar una cantidad establecida de balas, si se supera dicho límite se debe soplar la boquilla del arma correspondiente, la lógica que hemos utilizado se define a continuación:
 ```c
 private void Start()
     {
